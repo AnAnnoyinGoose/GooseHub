@@ -2,7 +2,7 @@ const menu = document.getElementById('1')
 
 console.log(menu);
 
-const toggleMenu = () => {
+function toggleMenu(){
     // when the menu is active, the menu will be shown
     // a close button will be shown
 
