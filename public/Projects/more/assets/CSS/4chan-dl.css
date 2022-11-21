@@ -1,0 +1,80 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #1b1b1b;
+
+}
+header{
+    background: #477779;
+    padding: 1vw;
+    height: 7vw;
+    display: flex;
+    align-items: center;
+    width: 100vmax;
+
+}
+.headerContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    z-index: 1;
+}
+header h1{
+    color: white;
+    font-size: 3vw;
+    text-align: center;
+}
+.menu{
+    z-index: 2;
+    position: relative;
+}
+.menuButton{
+    height: 6vw;
+    width: 6vw;
+    margin-left: 1vw;
+    display: flex;
+    border-radius: 1vw;
+    padding: 1vw;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    background: #00f2ff;
+    transition: fill 0.5s;
+    z-index: 2;
+}
+.menuButton:hover  {
+    fill: white;
+}
+.menuContainer{
+    width: 20vw;
+    height: 100vmax;
+    background: #2b2b2b;
+    z-index: 10;
+    opacity: 1;
+    position: absolute;
+    left: 0;
+
+}
+.menuContainer svg{
+    width: 2vw;
+    height: 2vw;
+    padding: 1vw;
+}
+.menuContainer ul{
+
+}
+.menuContainer li{
+
+}
+.menuContainer a{
+    display: flex;
+    align-items: center;
+    border: white solid 0.2vw;
+    margin: 1vw;
+    font-size: 2vw;
+
+}

@@ -1,0 +1,236 @@
+*::-webkit-scrollbar {
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: #2b2b2b;
+}
+*::-webkit-scrollbar-thumb {
+  background: #333;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a, h1, h2, h3, h4, h5, h6, p, span {
+  text-decoration: none;
+  color: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+  font-size: 50px;
+}
+
+.menuButton {
+  z-index: 999;
+  cursor: pointer;
+  display: none;
+  width: 60px;
+  height: 30px;
+  background: #5f5f5f;
+  border-radius: 5px;
+  border: none;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background-color: #1b1b1b;
+}
+nav ul {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+nav ul li {
+  list-style: none;
+  margin: 0 10px;
+}
+nav ul li a {
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+nav ul li a:hover {
+  color: #5f5f5f;
+}
+
+.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px);
+  background-color: rgba(0, 0, 0, 0.5);
+  animation: fadeIn 0.5s ease;
+  z-index: 999;
+}
+.active ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.active ul li {
+  list-style: none;
+  margin: 20px 0;
+}
+.active ul li a {
+  font-family: "Poppins", sans-serif;
+  font-size: 80px;
+  font-weight: 500;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.active ul li a:hover {
+  color: #5f5f5f;
+}
+.active .close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  width: 50px;
+  height: 30px;
+  background: #5f5f5f;
+  border-radius: 5px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body {
+  background-image: radial-gradient(#1b1b1b 3px, transparent 1px), radial-gradient(#1b1b1b 3px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+  background-color: #2b2b2b;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  color: #fff;
+}
+
+main {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas: "About-Me Contact" "feed feed";
+  grid-gap: 20px;
+  padding: 20px;
+}
+@media screen and (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+    grid-template-areas: "About-Me" "Contact" "feed";
+  }
+}
+
+.about-section {
+  width: 100%;
+  grid-area: About-Me;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #5f5f5f;
+  border-radius: 5px;
+  backdrop-filter: blur(4px);
+}
+.about-section h2 {
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.about-section p {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.contacts-section {
+  grid-area: Contact;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #5f5f5f;
+  border-radius: 5px;
+  backdrop-filter: blur(4px);
+}
+.contacts-section h2 {
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.contacts-section a {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 20px;
+  transition: color 0.3s ease;
+}
+.contacts-section a:hover {
+  color: #5f5f5f;
+}
+
+.activity-feed {
+  grid-area: feed;
+  display: flex;
+  flex-direction: column;
+  background: #2b2b2b;
+  border: 1px solid #5f5f5f;
+  border-radius: 5px;
+  padding: 10px;
+}
+.activity-feed h2 {
+  font-size: 50px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+.activity-feed .activity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #000;
+  background: #1b1b1b;
+}
+
+@media screen and (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+  nav ul {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=Style.css.map */
