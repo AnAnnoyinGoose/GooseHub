@@ -17,7 +17,3 @@ function toggleMenu(){
     })
     menu.appendChild(close)
 }
-
-
-
-
