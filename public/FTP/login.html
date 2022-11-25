@@ -2,13 +2,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>AAG</title>
-    <link rel="stylesheet" href="assets/CSS/Style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>AAG</title>
+  <link rel="stylesheet" href="assets/CSS/login-Style.css">
+
 </head>
 <body>
+<nav>
+    <div class="header-section">
+        <h1>AAG</h1>
+    </div>
+    <div class="link-section">
+        <button class="menuButton" onclick="toggleMenu()">Menu</button>
+
+        <ul class="menu" id="1">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="../Projects/projects.html">Projects</a></li>
+            <li><a href="../FTP/login.html">Cloud</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<main>
+<!--   expressjs login form-->
+    <form action="/login" method="post">
+        <div class="container">
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw"  id="psw" required>
+
+        <button type="submit">Login</button>
+        </div>
+
+
+    </form>
+
+
+
+</main>
+
+
 
 </body>
+<script src="assets/JS/script.js"></script>
 </html>

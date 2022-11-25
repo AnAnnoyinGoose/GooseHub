@@ -1,3 +1,18 @@
+body {
+  background-image: radial-gradient(#1b1b1b 3px, transparent 1px), radial-gradient(#1b1b1b 3px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-size: 50px 50px;
+  background-color: #2b2b2b;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  color: #fff;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 *::-webkit-scrollbar {
   width: 10px;
 }
@@ -11,22 +26,19 @@
   background: #555;
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 a, h1, h2, h3, h4, h5, h6, p, span {
   text-decoration: none;
   color: #fff;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Poppins", sans-serif;
-  font-size: 50px;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
 .menuButton {
   z-index: 999;
   cursor: pointer;
@@ -38,15 +50,8 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 nav {
+  height: 60px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -98,7 +103,6 @@ nav ul li a:hover {
 }
 .active ul li {
   list-style: none;
-  margin: 20px 0;
 }
 .active ul li a {
   font-family: "Poppins", sans-serif;
@@ -125,106 +129,78 @@ nav ul li a:hover {
   justify-content: center;
 }
 
-body {
-  background-image: radial-gradient(#1b1b1b 3px, transparent 1px), radial-gradient(#1b1b1b 3px, transparent 1px);
-  background-position: 0 0, 25px 25px;
-  background-size: 50px 50px;
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+main form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #1b1b1b;
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
+main form h1 {
+  font-size: 40px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+main form input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  outline: none;
   background-color: #2b2b2b;
-  font-family: "Poppins", sans-serif;
-  font-size: 16px;
   color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+}
+main form input::placeholder {
+  color: #555;
+}
+main form button {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  background-color: #5f5f5f;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+main form button:hover {
+  background-color: #333;
 }
 
-main {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  grid-template-areas: "About-Me Contact" "feed feed";
-  grid-gap: 20px;
-  padding: 20px;
-}
 @media screen and (max-width: 768px) {
-  main {
-    grid-template-columns: 1fr;
-    grid-template-areas: "About-Me" "Contact" "feed";
+  .wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .menuButton {
+    display: block;
+  }
+  nav ul {
+    display: none;
   }
 }
-
-.about-section {
-  width: 100%;
-  grid-area: About-Me;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  border: 1px solid #5f5f5f;
-  border-radius: 5px;
-  backdrop-filter: blur(4px);
-}
-.about-section h2 {
-  font-size: 50px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-.about-section p {
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: 20px;
-}
-
-.contacts-section {
-  grid-area: Contact;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  border: 1px solid #5f5f5f;
-  border-radius: 5px;
-  backdrop-filter: blur(4px);
-}
-.contacts-section h2 {
-  font-size: 50px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-.contacts-section a {
-  font-size: 20px;
-  font-weight: 300;
-  margin-bottom: 20px;
-  transition: color 0.3s ease;
-}
-.contacts-section a:hover {
-  color: #5f5f5f;
-}
-
-.activity-feed {
-  grid-area: feed;
-  display: flex;
-  flex-direction: column;
-  background: #2b2b2b;
-  border: 1px solid #5f5f5f;
-  border-radius: 5px;
-  padding: 10px;
-}
-.activity-feed h2 {
-  font-size: 50px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-.activity-feed .activity {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #000;
-  background: #1b1b1b;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
+  .wrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
   .menuButton {
     display: block;
   }
