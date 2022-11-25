@@ -48,6 +48,7 @@ app.post('/login', (req, res) => {
     }
     else {
         // reload the page
+        console.log('Failed login attempt from ' + req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress);
         res.redirect('/FTP/login.html');
     }
 
@@ -70,11 +71,13 @@ setTimeout(() => {
             let info = setInterval(() => {
                 process.stdout.write(`\rMemory Usage: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024 * 100) / 100} MB | Uptime: ${Math.round(process.uptime())} seconds | Connected Users (to the cloud): ${Object.keys(ips).length} | IPs: ${util.inspect(ips)}\r`);
             }, 1000);
+            setTimeout(() => {
+                clearInterval(info);
+            }, 10000);
+
 
         }
-        else if (text === '\n') {
-            clearInterval('info');
-        }
+
 
     });
 
