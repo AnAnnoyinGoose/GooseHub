@@ -41,9 +41,9 @@ app.post('/login', (req, res) => {
     // log
     console.log(uname, psw);
     if (login(uname, psw)) {
-        console.log('Logged in as ' + uname + ' From IP: ' + req.ip);
+        console.log('Logged in as ' + uname + ' From IP: ' + req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress);
         //push the ip to the ips object with the username as the key
-        ips[uname] = req.ip;
+        ips[uname] = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         res.redirect('/FTP/sftp.html');
     }
     else {
