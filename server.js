@@ -102,6 +102,9 @@ app.post('/cloud/login', (req, res) => {
                 } );
                 // render the page
                 res.render('cloud', {username: uname, data: files});
+                setTimeout(() => {
+                    Disconnect();
+                } , 500);
             });
         });
     } else {
