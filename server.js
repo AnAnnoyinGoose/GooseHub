@@ -1,18 +1,65 @@
+// requires
 const dotenv = require('dotenv');
 dotenv.config();
-
 const express = require('express');
 const util = require("util");
+const users = require("./users.json");
 const app = express();
 const port = process.env.PORT || 80;
+const sftp = require('ssh2-sftp-client');
+// Setup
+app.use(express.static('public'));
+app.use('/css', express.static(__dirname + 'public/css'))
+app.use('/js', express.static(__dirname + 'public/js'))
+app.use('/img', express.static(__dirname + 'public/images'))
+app.use(express.urlencoded({extended: true}));
+app.set('views', './views');
+app.set('view engine', 'ejs');
+// SFTP
+const connection = new sftp();
+const config = {
+    host: process.env.HOST,
+    port: process.env.HOSTPORT,
+    username: null,
+    password: null,
+}
+let Connect = async () => {
+    try {
+        await connection.connect(config);
+        console.log('Connected');
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+let Disconnect = async () => {
+    try {
+        await connection.end();
+        console.log('Disconnected');
+    } catch (err) {
+        console.error(err.message);
+    }
+}
+let list = async () => {
+    try {
+        let list = await connection.list('/home/' + config.username);
+        // ignore if the name starts with a dot
+        list = list.filter(item => !item.name.startsWith('.'));
+        // parse the list to get the file names types and sizes
+        list = list.map(item => {
+            return {
+                name: item.name,
+                type: item.type,
+                size: item.size
+            }
+        });
+        return list;
+    } catch (err) {
+        console.error(err.message);
+    }
+}
 
-const jsonParser = express.json();
 
-const ips = {};
-
-// login function that checks the users.json file
-// for the username (u) and password (p)
-// returns true if the user exists, false otherwise
+// Functions
 const login = (u,p) => {
     const users = require('./users.json');
     for (let i = 0; i < users.length; i++) {
@@ -27,33 +74,52 @@ const login = (u,p) => {
 
 }
 
-
-// link Stylesheet
-app.use(express.static("public"));
-app.use(express.urlencoded({extended: true}));
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/index.html');
+// Navigation
+app.get('', (req, res) => {
+    res.render('index', { text: 'Hey' })
+})
+app.get('/projects', (req, res) => {
+    res.render('projects')
+})
+app.get('/cloud', (req, res) => {
+    res.render('login')
+});
+app.post('/cloud/login', (req, res) => {
+    const {uname,psw} = req.body;
+    console.log(uname,psw);
+    if (login(uname,psw)) {
+        // set the username for the config
+        config.username = uname.toLowerCase();
+        config.password = psw;
+        // connect to the server
+        Connect().then(() => {
+            // list the files
+            list().then(data => {
+                // for each file create an element
+                let files = '';
+                data.forEach(item => {
+                    files += `<div class="file"><p class="element">${item.name}</p></div>`;
+                } );
+                // render the page
+                res.render('cloud', {username: uname, data: files});
+            });
+        });
+    } else {
+        res.render('login', {error: 'Invalid Username or Password'});
+    }
 });
 
-// get the data from the form in public/FTP/login.html
-app.post('/login', (req, res) => {
-    const { uname, psw } = req.body;
-    // log
-    console.log(uname, psw);
-    if (login(uname, psw)) {
-        console.log('Logged in as ' + uname + ' From IP: ' + req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress);
-        //push the ip to the ips object with the username as the key
-        ips[uname] = req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-        res.redirect('/FTP/sftp.html');
-    }
-    else {
-        // reload the page
-        console.log('Failed login attempt from ' + req.headers['cf-connecting-ip'] || req.headers['x-forwarded-for'] || req.connection.remoteAddress);
-        res.redirect('/FTP/login.html');
-    }
-
-
+app.post('/logout', (req, res) => {
+    res.render('login');
+    Disconnect();
 });
+app.use((req, res) => {
+    res.status(404).render('404');
+});
+
+
+
+
 
 
 
@@ -61,7 +127,7 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}\n`);
 });
 
-// wait 3seconds
+// wait 2second
 setTimeout(() => {
     // console input (stdin)
     process.stdin.resume();
@@ -73,7 +139,7 @@ setTimeout(() => {
             }, 1000);
             setTimeout(() => {
                 clearInterval(info);
-            }, 10000);
+            }, 60000);
 
 
         }
@@ -85,7 +151,9 @@ setTimeout(() => {
     process.stdout.write('Server is running...\n');
     process.stdout.write('Type info to get info about the server\n');
 
-})
+},1000);
+
+
 
 
 

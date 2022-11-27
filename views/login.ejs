@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>AAG</title>
-  <link rel="stylesheet" href="assets/CSS/login-Style.css">
+  <link rel="stylesheet" href="css/login-Style.css">
 
 </head>
 <body>
@@ -18,9 +18,9 @@
         <button class="menuButton" onclick="toggleMenu()">Menu</button>
 
         <ul class="menu" id="1">
-            <li><a href="../index.html">Home</a></li>
-            <li><a href="../Projects/projects.html">Projects</a></li>
-            <li><a href="../FTP/login.html">Cloud</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/cloud">Cloud</a></li>
         </ul>
     </div>
 </nav>
@@ -28,7 +28,7 @@
 
 <main>
 <!--   expressjs login form-->
-    <form action="/login" method="post">
+    <form action="/cloud/login" method="post">
         <div class="container">
         <label for="uname"><b>Username</b></label>
         <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
@@ -49,5 +49,5 @@
 
 
 </body>
-<script src="assets/JS/script.js"></script>
+<script src="js/login-script.js"></script>
 </html>

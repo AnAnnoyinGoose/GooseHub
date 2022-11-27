@@ -1,0 +1,91 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #3b3b3b;
+}
+a, h1, h2, h3, h4, h5, h6, p, span {
+    text-decoration: none;
+    color: #fff;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #1b1b1b;
+
+}
+nav h1{
+    font-family: "Poppins", sans-serif;
+    font-size: 50px;
+}
+nav input{
+    background: red;
+    border: none;
+    border-radius: 5px;
+    width: 100px;
+    height: 50px;
+}
+aside{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 300px;
+    height: 100vh;
+    background-color: #1b1b1b;
+}
+
+.file{
+    display: block;
+    width: 80%;
+    height: 50px;
+    background-color: #5b5b5b;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+.file:hover{
+    background-color: #3b3b3b;
+}
+.file p{
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+#menu{
+    display: none;
+    position: absolute;
+    width: 200px;
+    height: 100px;
+    background-color: #1b1b1b;
+    border-radius: 5px;
+    padding: 10px;
+    z-index: 1;
+}
+.show{
+    display: block;
+}
+
+@media screen and (max-width: 768px){
+    nav{
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    nav h1{
+        font-size: 30px;
+    }
+    nav input{
+        width: 120%;
+        height: 30px;
+    }
+}
+
+
